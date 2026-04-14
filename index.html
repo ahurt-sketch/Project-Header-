@@ -3,49 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <style>
-body{margin:0;font-family:Segoe UI,Arial;background:#f4f6f9}
-.card{border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.08);background:white}
-.header{background:linear-gradient(135deg,#2b579a,#4a90e2);color:white;padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
-.left{display:flex;align-items:center;gap:14px}
-.logo{width:48px;height:48px;border-radius:10px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center}
-.badge{padding:8px 14px;border-radius:999px;font-size:12px;font-weight:600}
-.content{padding:18px 20px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px 24px}
-.label{font-size:11px;text-transform:uppercase;color:#6b6f76}
-.value{font-size:15px;font-weight:600}
+body{
+  margin:0;
+  font-family:Segoe UI,Arial;
+  background:#f4f6f9;
+}
+
+.card{
+  width:260px;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  background:white;
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#2b579a,#4a90e2);
+  color:white;
+  padding:14px;
+}
+
+.title{
+  font-size:16px;
+  font-weight:600;
+}
+
+.subtitle{
+  font-size:11px;
+  opacity:.85;
+}
+
+/* BADGE */
+.badge{
+  margin-top:8px;
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:600;
+  background:#ffb900;
+  color:black;
+}
+
+/* CONTENT */
+.content{
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.field{
+  border-bottom:1px solid #eee;
+  padding-bottom:8px;
+}
+
+.label{
+  font-size:10px;
+  text-transform:uppercase;
+  color:#6b6f76;
+}
+
+.value{
+  font-size:13px;
+  font-weight:600;
+  color:#1f1f1f;
+}
 </style>
 </head>
+
 <body>
 
 <div class="card">
+
   <div class="header">
-    <div class="left">
-      <div class="logo">🏗️</div>
-      <div>
-        <div id="name" style="font-size:20px;font-weight:600;">Project</div>
-        <div style="font-size:12px;opacity:.8;">Project Overview</div>
-      </div>
-    </div>
+    <div class="title" id="name">Project Name</div>
+    <div class="subtitle">Project Overview</div>
     <div class="badge" id="phase">DESIGN</div>
   </div>
 
   <div class="content">
-    <div><div class="label">Project Number</div><div class="value" id="num">000</div></div>
-    <div><div class="label">Client</div><div class="value" id="client">Client</div></div>
-    <div><div class="label">Project Manager</div><div class="value" id="pm">PM</div></div>
+    <div class="field">
+      <div class="label">Project Number</div>
+      <div class="value" id="num">000</div>
+    </div>
+
+    <div class="field">
+      <div class="label">Client</div>
+      <div class="value" id="client">Client</div>
+    </div>
+
+    <div class="field">
+      <div class="label">Project Manager</div>
+      <div class="value" id="pm">PM</div>
+    </div>
   </div>
+
 </div>
 
 <script>
 const p=new URLSearchParams(location.search);
 const set=(id,key)=>p.get(key)&&(document.getElementById(id).innerText=p.get(key));
-set("name","name");set("num","number");set("client","client");set("pm","pm");
+set("name","name");
+set("num","number");
+set("client","client");
+set("pm","pm");
 
 const phase=p.get("phase");
 if(phase){
   const b=document.getElementById("phase");
   b.innerText=phase.toUpperCase();
-  if(phase==="Construction"){b.style.background="#107c10";b.style.color="white";}
-  else if(phase==="Design"){b.style.background="#ffb900";}
+
+  if(phase==="Construction"){
+    b.style.background="#107c10";
+    b.style.color="white";
+  }
+  else if(phase==="Design"){
+    b.style.background="#ffb900";
+  }
+  else{
+    b.style.background="#605e5c";
+    b.style.color="white";
+  }
 }
 </script>
 
