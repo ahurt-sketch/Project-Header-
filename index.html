@@ -7,19 +7,35 @@
 body{
   margin:0;
   font-family:"Segoe UI", Arial, sans-serif;
-  background:#ffffff;
+  background:#f4f6f9;
 }
 
-.card{
-  width:280px;
-  border-left:4px solid #1f3b5c;
-  background:#fff;
-  padding:16px;
+/* CONTAINER */
+.bar{
+  width:100%;
+  background:#ffffff;
+  border-bottom:1px solid #e5e5e5;
+  padding:14px 24px;
   box-sizing:border-box;
 }
 
-.title{
-  font-size:16px;
+/* GRID */
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+/* PROJECT */
+.project{
+  display:flex;
+  flex-direction:column;
+}
+
+.name{
+  font-size:18px;
   font-weight:600;
   color:#1f3b5c;
 }
@@ -27,12 +43,18 @@ body{
 .client{
   font-size:12px;
   color:#6b6f76;
-  margin-bottom:12px;
 }
 
-/* INFO */
-.field{
-  margin-bottom:10px;
+/* INFO BLOCKS */
+.info{
+  display:flex;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+.block{
+  display:flex;
+  flex-direction:column;
 }
 
 .label{
@@ -49,15 +71,15 @@ body{
 
 /* STATUS */
 .status{
-  margin-top:14px;
-  border-top:1px solid #e5e5e5;
-  padding-top:12px;
+  display:flex;
+  gap:16px;
+  align-items:center;
 }
 
-.status-row{
+.status-item{
   display:flex;
-  justify-content:space-between;
-  margin-bottom:6px;
+  align-items:center;
+  gap:6px;
   font-size:12px;
 }
 
@@ -65,7 +87,6 @@ body{
   width:10px;
   height:10px;
   border-radius:50%;
-  display:inline-block;
 }
 
 .green{background:#107c10;}
@@ -77,54 +98,66 @@ body{
 
 <body>
 
-<div class="card">
+<div class="bar">
 
-  <!-- HEADER -->
-  <div class="title" id="name">Project Name</div>
-  <div class="client" id="client">Client Name</div>
+  <div class="row">
 
-  <!-- INFO -->
-  <div class="field">
-    <div class="label">Project Number</div>
-    <div class="value" id="num">---</div>
-  </div>
-
-  <div class="field">
-    <div class="label">Project Manager</div>
-    <div class="value" id="pm">---</div>
-  </div>
-
-  <div class="field">
-    <div class="label">Current Phase</div>
-    <div class="value" id="phase">---</div>
-  </div>
-
-  <div class="field">
-    <div class="label">General Contractor</div>
-    <div class="value" id="gc">---</div>
-  </div>
-
-  <div class="field">
-    <div class="label">Owner</div>
-    <div class="value" id="owner">---</div>
-  </div>
-
-  <!-- STATUS -->
-  <div class="status">
-    <div class="status-row">
-      <span>Schedule</span>
-      <span class="dot green" id="schedule"></span>
+    <!-- LEFT -->
+    <div class="project">
+      <div class="name" id="name">Project Name</div>
+      <div class="client" id="client">Client Name</div>
     </div>
 
-    <div class="status-row">
-      <span>Budget</span>
-      <span class="dot yellow" id="budget"></span>
+    <!-- MIDDLE -->
+    <div class="info">
+
+      <div class="block">
+        <div class="label">Project Number</div>
+        <div class="value" id="num">---</div>
+      </div>
+
+      <div class="block">
+        <div class="label">Phase</div>
+        <div class="value" id="phase">---</div>
+      </div>
+
+      <div class="block">
+        <div class="label">Project Manager</div>
+        <div class="value" id="pm">---</div>
+      </div>
+
+      <div class="block">
+        <div class="label">GC</div>
+        <div class="value" id="gc">---</div>
+      </div>
+
+      <div class="block">
+        <div class="label">Owner</div>
+        <div class="value" id="owner">---</div>
+      </div>
+
     </div>
 
-    <div class="status-row">
-      <span>Risk</span>
-      <span class="dot red" id="risk"></span>
+    <!-- RIGHT -->
+    <div class="status">
+
+      <div class="status-item">
+        <div class="dot green" id="schedule"></div>
+        <span>Schedule</span>
+      </div>
+
+      <div class="status-item">
+        <div class="dot yellow" id="budget"></div>
+        <span>Budget</span>
+      </div>
+
+      <div class="status-item">
+        <div class="dot red" id="risk"></div>
+        <span>Risk</span>
+      </div>
+
     </div>
+
   </div>
 
 </div>
@@ -140,15 +173,14 @@ function set(id,key){
 set("name","name");
 set("client","client");
 set("num","number");
-set("pm","pm");
 set("phase","phase");
+set("pm","pm");
 set("gc","gc");
 set("owner","owner");
 
 function setStatus(id,value){
-  const el=document.getElementById(id);
   if(!value) return;
-  el.className="dot " + value;
+  document.getElementById(id).className="dot " + value;
 }
 
 setStatus("schedule", p.get("schedule"));
