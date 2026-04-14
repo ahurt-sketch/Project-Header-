@@ -2,75 +2,75 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <style>
 body{
   margin:0;
-  font-family:Segoe UI,Arial;
-  background:#f4f6f9;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background:#ffffff;
 }
 
+/* SIDEBAR CARD */
 .card{
-  width:260px;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
-  background:white;
+  width:280px;
+  border-left:4px solid #1f3b5c;
+  background:#fff;
+  padding:14px;
+  box-sizing:border-box;
 }
 
 /* HEADER */
 .header{
-  background:linear-gradient(135deg,#2b579a,#4a90e2);
-  color:white;
-  padding:14px;
+  border-bottom:1px solid #e5e5e5;
+  padding-bottom:10px;
+  margin-bottom:12px;
 }
 
 .title{
   font-size:16px;
   font-weight:600;
+  color:#1f3b5c;
 }
 
 .subtitle{
   font-size:11px;
-  opacity:.85;
+  color:#6b6f76;
+  margin-top:2px;
 }
 
-/* BADGE */
+/* STATUS */
 .badge{
-  margin-top:8px;
   display:inline-block;
-  padding:5px 10px;
-  border-radius:999px;
+  margin-top:8px;
+  padding:4px 10px;
   font-size:11px;
   font-weight:600;
-  background:#ffb900;
-  color:black;
+  border:1px solid #1f3b5c;
+  color:#1f3b5c;
+  background:#f5f7fa;
 }
 
-/* CONTENT */
-.content{
-  padding:14px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
+/* FIELDS */
 .field{
-  border-bottom:1px solid #eee;
-  padding-bottom:8px;
+  padding:10px 0;
+  border-bottom:1px solid #f0f0f0;
 }
 
 .label{
   font-size:10px;
   text-transform:uppercase;
-  color:#6b6f76;
+  letter-spacing:0.5px;
+  color:#8a8f98;
 }
 
 .value{
   font-size:13px;
   font-weight:600;
-  color:#1f1f1f;
+  color:#222;
+  margin-top:3px;
 }
 </style>
+
 </head>
 
 <body>
@@ -78,33 +78,36 @@ body{
 <div class="card">
 
   <div class="header">
-    <div class="title" id="name">Project Name</div>
-    <div class="subtitle">Project Overview</div>
+    <div class="title" id="name">PROJECT NAME</div>
+    <div class="subtitle">Project Information</div>
     <div class="badge" id="phase">DESIGN</div>
   </div>
 
-  <div class="content">
-    <div class="field">
-      <div class="label">Project Number</div>
-      <div class="value" id="num">000</div>
-    </div>
+  <div class="field">
+    <div class="label">Project Number</div>
+    <div class="value" id="num">---</div>
+  </div>
 
-    <div class="field">
-      <div class="label">Client</div>
-      <div class="value" id="client">Client</div>
-    </div>
+  <div class="field">
+    <div class="label">Client</div>
+    <div class="value" id="client">---</div>
+  </div>
 
-    <div class="field">
-      <div class="label">Project Manager</div>
-      <div class="value" id="pm">PM</div>
-    </div>
+  <div class="field">
+    <div class="label">Project Manager</div>
+    <div class="value" id="pm">---</div>
   </div>
 
 </div>
 
 <script>
 const p=new URLSearchParams(location.search);
-const set=(id,key)=>p.get(key)&&(document.getElementById(id).innerText=p.get(key));
+
+const set=(id,key)=>{
+  const v=p.get(key);
+  if(v) document.getElementById(id).innerText=v;
+};
+
 set("name","name");
 set("num","number");
 set("client","client");
@@ -115,16 +118,13 @@ if(phase){
   const b=document.getElementById("phase");
   b.innerText=phase.toUpperCase();
 
-  if(phase==="Construction"){
-    b.style.background="#107c10";
-    b.style.color="white";
+  if(phase.toLowerCase()==="construction"){
+    b.style.borderColor="#1f3b5c";
+    b.style.color="#1f3b5c";
   }
-  else if(phase==="Design"){
-    b.style.background="#ffb900";
-  }
-  else{
-    b.style.background="#605e5c";
-    b.style.color="white";
+  if(phase.toLowerCase()==="design"){
+    b.style.borderColor="#666";
+    b.style.color="#666";
   }
 }
 </script>
