@@ -1,192 +1,131 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-
-<style>
-body{
-  margin:0;
-  font-family:"Segoe UI", Arial, sans-serif;
-  background:#f4f6f9;
-}
-
-/* CONTAINER */
-.bar{
-  width:100%;
-  background:#ffffff;
-  border-bottom:1px solid #e5e5e5;
-  padding:14px 24px;
-  box-sizing:border-box;
-}
-
-/* GRID */
-.row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  flex-wrap:wrap;
-}
-
-/* PROJECT */
-.project{
-  display:flex;
-  flex-direction:column;
-}
-
-.name{
-  font-size:18px;
-  font-weight:600;
-  color:#1f3b5c;
-}
-
-.client{
-  font-size:12px;
-  color:#6b6f76;
-}
-
-/* INFO BLOCKS */
-.info{
-  display:flex;
-  gap:30px;
-  flex-wrap:wrap;
-}
-
-.block{
-  display:flex;
-  flex-direction:column;
-}
-
-.label{
-  font-size:10px;
-  text-transform:uppercase;
-  color:#8a8f98;
-}
-
-.value{
-  font-size:13px;
-  font-weight:600;
-  color:#222;
-}
-
-/* STATUS */
-.status{
-  display:flex;
-  gap:16px;
-  align-items:center;
-}
-
-.status-item{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  font-size:12px;
-}
-
-.dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-}
-
-.green{background:#107c10;}
-.yellow{background:#ffb900;}
-.red{background:#d13438;}
-
-</style>
-</head>
-
-<body>
-
-<div class="bar">
-
-  <div class="row">
-
-    <!-- LEFT -->
-    <div class="project">
-      <div class="name" id="name">Project Name</div>
-      <div class="client" id="client">Client Name</div>
+<div class="project-details-container">
+    <div class="project-header">
+        <span class="project-title">Bridge Upgrade - City of Phoenix</span>
+        <span class="project-number">Project Number: 2026-001</span>
     </div>
-
-    <!-- MIDDLE -->
-    <div class="info">
-
-      <div class="block">
-        <div class="label">Project Number</div>
-        <div class="value" id="num">---</div>
-      </div>
-
-      <div class="block">
-        <div class="label">Phase</div>
-        <div class="value" id="phase">---</div>
-      </div>
-
-      <div class="block">
-        <div class="label">Project Manager</div>
-        <div class="value" id="pm">---</div>
-      </div>
-
-      <div class="block">
-        <div class="label">GC</div>
-        <div class="value" id="gc">---</div>
-      </div>
-
-      <div class="block">
-        <div class="label">Owner</div>
-        <div class="value" id="owner">---</div>
-      </div>
-
+    <div class="project-info-row">
+        <div class="info-item">
+            <h3 class="info-label">Project Manager</h3>
+            <p class="info-value">Jane Smith</p>
+        </div>
+        <div class="info-item">
+            <h3 class="info-label">Current Phase</h3>
+            <p class="info-value">Construction</p>
+        </div>
+        <div class="info-item">
+            <h3 class="info-label">General Contractor</h3>
+            <p class="info-value">Turner Construction</p>
+        </div>
+        <div class="info-item">
+            <h3 class="info-label">Owner</h3>
+            <p class="info-value">City of Phoenix</p>
+        </div>
+        <div class="info-item">
+            <h3 class="info-label">Schedule</h3>
+            <p class="info-value">TBD</p>
+        </div>
+        <div class="info-item">
+            <h3 class="info-label">Budget</h3>
+            <p class="info-value">TBD</p>
+        </div>
+        <div class="info-item">
+            <h3 class="info-label">Risk</h3>
+            <p class="info-value">TBD</p>
+        </div>
     </div>
-
-    <!-- RIGHT -->
-    <div class="status">
-
-      <div class="status-item">
-        <div class="dot green" id="schedule"></div>
-        <span>Schedule</span>
-      </div>
-
-      <div class="status-item">
-        <div class="dot yellow" id="budget"></div>
-        <span>Budget</span>
-      </div>
-
-      <div class="status-item">
-        <div class="dot red" id="risk"></div>
-        <span>Risk</span>
-      </div>
-
-    </div>
-
-  </div>
-
 </div>
 
-<script>
-const p=new URLSearchParams(location.search);
-
-function set(id,key){
-  const v=p.get(key);
-  if(v) document.getElementById(id).innerText=v;
+<style>
+.project-details-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #f8f9fa; /* Light, modern background */
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean, professional font */
+    box-sizing: border-box;
 }
 
-set("name","name");
-set("client","client");
-set("num","number");
-set("phase","phase");
-set("pm","pm");
-set("gc","gc");
-set("owner","owner");
-
-function setStatus(id,value){
-  if(!value) return;
-  document.getElementById(id).className="dot " + value;
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0; /* Soft separator */
 }
 
-setStatus("schedule", p.get("schedule"));
-setStatus("budget", p.get("budget"));
-setStatus("risk", p.get("risk"));
-</script>
+.project-title {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #343a40; /* Darker text for title */
+}
 
-</body>
-</html>
+.project-number {
+    font-size: 0.9em;
+    color: #6c757d; /* Muted text for project number */
+    font-weight: 500;
+}
+
+.project-info-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+}
+
+.info-item {
+    flex: 1; /* Distribute space evenly */
+    min-width: 120px; /* Minimum width before wrapping */
+    padding: 10px 15px;
+    text-align: center;
+    margin: 0 5px; /* Space between items */
+    background-color: #ffffff; /* White background for each item */
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08); /* Light shadow for items */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+.info-item:hover {
+    transform: translateY(-3px); /* Slight lift on hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12); /* More pronounced shadow on hover */
+}
+
+.info-label {
+    font-size: 0.95em;
+    font-weight: 700; /* Bold titles */
+    color: #0078d4; /* AE firm-like primary color */
+    margin-bottom: 5px;
+    text-transform: uppercase; /* Uppercase for clear labeling */
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 1em;
+    font-weight: 500;
+    color: #495057; /* Slightly darker text for values */
+    margin-top: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .project-header {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .project-title, .project-number {
+        margin-bottom: 5px;
+    }
+    .project-info-row {
+        flex-direction: column;
+        align-items: center;
+    }
+    .info-item {
+        width: 95%; /* Full width on small screens */
+        margin-bottom: 10px;
+        min-width: unset; /* Remove min-width on small screens */
+    }
+}
+</style>
